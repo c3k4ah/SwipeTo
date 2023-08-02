@@ -57,6 +57,7 @@ class _AppHomeState extends State<AppHome> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SwipeTo(
+                  isMe: false,
                   child: const Align(
                     alignment: Alignment.centerLeft,
                     child: MessageViewWidget(
@@ -76,6 +77,7 @@ class _AppHomeState extends State<AppHome> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 SwipeTo(
+                  isMe: true,
                   child: const Align(
                     alignment: Alignment.centerRight,
                     child: MessageViewWidget(
@@ -95,6 +97,7 @@ class _AppHomeState extends State<AppHome> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 SwipeTo(
+                  isMe: false,
                   child: const MessageViewWidget(
                     label: '👈🏿 Swipe me Left OR Swipe me right 👉🏿 ',
                   ),

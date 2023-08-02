@@ -51,9 +51,13 @@ class SwipeTo extends StatefulWidget {
   /// if not passed swipe to left will be not available
   final GestureDragUpdateCallback? onLeftSwipe;
 
+  ///
+  final bool isMe;
+
   const SwipeTo({
     Key? key,
     required this.child,
+    required this.isMe,
     this.onRightSwipe,
     this.onLeftSwipe,
     this.iconOnRightSwipe = Icons.reply,
@@ -97,11 +101,13 @@ class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {
     _rightIconAnimation = _controller.drive(
       Tween<double>(begin: 0.0, end: 0.0),
     );
-    _onSwipeLeft = widget.onLeftSwipe ?? (details) {
+    _onSwipeLeft = widget.onLeftSwipe ??
+        (details) {
           log("Left Swipe Not Provided");
         };
 
-    _onSwipeRight = widget.onRightSwipe ?? (details) {
+    _onSwipeRight = widget.onRightSwipe ??
+        (details) {
           log("Right Swipe Not Provided");
         };
     _controller.addListener(() {
@@ -157,14 +163,14 @@ class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {
     return GestureDetector(
       onPanUpdate: (details) {
         if (details.delta.dx > 1 && widget.onRightSwipe != null) {
-          _runAnimation(onRight: true,  details: details);
+          _runAnimation(onRight: true, details: details);
         }
         if (details.delta.dx < -1 && widget.onLeftSwipe != null) {
           _runAnimation(onRight: false, details: details);
         }
       },
       child: Stack(
-        alignment: Alignment.center,
+        alignment: widget.isMe ? Alignment.centerRight : Alignment.centerLeft,
         fit: StackFit.passthrough,
         children: [
           Row(
